@@ -1,9 +1,8 @@
-import { Button } from "@mui/material";
 import * as React from "react";
 import Player, { player } from "./components/player";
 
 function App() {
-  const [songs, setSongs] = React.useState([
+  const [songs] = React.useState([
     {
       title: "Dark Line",
       artist: "Satoshi Bando",
@@ -23,11 +22,24 @@ function App() {
     currentSongIndex + 1
   );
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    setNextSongIndex(() => {
+      if (currentSongIndex + 1 > songs.length - 1) {
+        return 0;
+      } else {
+        return currentSongIndex + 1;
+      }
+    });
+  }, [currentSongIndex]);
 
   return (
     <>
-      <Player song={songs[currentSongIndex]} nextSong={songs[nextSongIndex]} />
+      <Player
+        currentSongIndex={currentSongIndex}
+        setCurrentSongIndex={setCurrentSongIndex}
+        nextSongIndex={nextSongIndex}
+        songs={songs}
+      />
     </>
   );
 }

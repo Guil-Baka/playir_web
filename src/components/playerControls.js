@@ -13,7 +13,7 @@ import {
 } from "@mui/icons-material";
 import { useTheme } from "@mui/system";
 
-function PlayerControls() {
+function PlayerControls(props) {
   const [paused, setPaused] = React.useState(0);
 
   const theme = useTheme();

@@ -49,7 +49,6 @@ export default function MusicPlayerSlider(props) {
   const theme = useTheme();
   const duration = 200; // seconds
   const [position, setPosition] = React.useState(32);
-  const [paused, setPaused] = React.useState(false);
   function formatDuration(value) {
     const minute = Math.floor(value / 60);
     const secondLeft = value - minute * 60;
@@ -63,7 +62,7 @@ export default function MusicPlayerSlider(props) {
       <Widget>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <CoverImage>
-            <img alt="can't win - Chilling Sunday" src={props.img} />
+            <img alt="" src={props.song.img_src} />
           </CoverImage>
           <Box sx={{ ml: 1.5, minWidth: 0 }}>
             <Typography noWrap>
@@ -129,13 +128,17 @@ export default function MusicPlayerSlider(props) {
           }}
         >
           <IconButton aria-label="previous song">
-            <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
+            <FastRewindRounded
+              fontSize="large"
+              htmlColor={mainIconColor}
+              onClick={() => props.SkipSong(false)}
+            />
           </IconButton>
           <IconButton
-            aria-label={paused ? "play" : "pause"}
-            onClick={() => setPaused(!paused)}
+            aria-label={props.isPlaying ? "play" : "pause"}
+            onClick={() => props.setIsPlaying(!props.isPlaying)}
           >
-            {paused ? (
+            {props.isPlaying ? (
               <PlayArrowRounded
                 sx={{ fontSize: "3rem" }}
                 htmlColor={mainIconColor}
@@ -148,7 +151,11 @@ export default function MusicPlayerSlider(props) {
             )}
           </IconButton>
           <IconButton aria-label="next song">
-            <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
+            <FastForwardRounded
+              fontSize="large"
+              htmlColor={mainIconColor}
+              onClick={() => props.SkipSong()}
+            />
           </IconButton>
         </Box>
         <Stack
