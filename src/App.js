@@ -34,12 +34,14 @@ function App() {
 
   return (
     <>
+      {/* <div> */}
       <Player
         currentSongIndex={currentSongIndex}
         setCurrentSongIndex={setCurrentSongIndex}
         nextSongIndex={nextSongIndex}
         songs={songs}
       />
+      {/* </div> */}
     </>
   );
 }
