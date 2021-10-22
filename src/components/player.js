@@ -87,7 +87,7 @@ function Player(props) {
 
   return (
     // ROOT
-    <Grid container height="100%">
+    <Grid container height="calc(100% - 30px)">
       {/* Esquerda */}
       <Grid item xs={2}>
         {/* Container Esquerda */}
@@ -105,7 +105,7 @@ function Player(props) {
             style={{ height: "29.72%", backgroundColor: "white" }}
           >
             <CoverImage style={{ backgroundColor: "#181818" }}>
-              <img alt="" src={props.currentSongIndex.img_src} />{" "}
+              <img alt="" src={props.currentSongIndex.img_src} />
               {/* Ainda não importando a imagem, sou burro não sei porquê */}
             </CoverImage>
           </Grid>
@@ -125,14 +125,18 @@ function Player(props) {
           <Grid
             item
             xs={12}
-            style={{ height: "calc(100% - 70px)", backgroundColor: "green" }}
+            style={{ height: "calc(100% - 10.83%)", backgroundColor: "green" }}
           ></Grid>
           {/* Baixo */}
           <Grid
             item
             xs={12}
-            style={{ height: "70px", backgroundColor: "#181818" }}
-          ></Grid>
+            style={{ height: "10.83%", backgroundColor: "#181818" }}
+          >
+            <div
+              style={{ width: "100%", height: "8%", backgroundColor: "red" }}
+            ></div>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

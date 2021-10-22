@@ -5,17 +5,41 @@ const expressApp = express();
 const cors = require("cors");
 const router = express.Router();
 
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
 const isDev = require("electron-is-dev");
 
 function createWindow() {
+  // require("@electron/remote/main").initialize();
   // Create the browser window.
   const win = new BrowserWindow({
     width: 1280,
     height: 720,
+    minHeight: 300,
+    minWidth: 400,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
+      contextIsolation: false,
     },
+  });
+
+  win.removeMenu(); //Removes the menu from Electron's menu bar'
+
+  globalShortcut.register("f5", function () {
+    win.reload();
+  });
+
+  ipcMain.handle("close-window", async (event) => {
+    win.close();
+  });
+
+  ipcMain.handle("min-window", async (event) => {
+    win.minimize();
+  });
+
+  ipcMain.handle("max-window", async (event) => {
+    win.isMaximized() ? win.unmaximize() : win.maximize();
   });
 
   // and load the index.html of the app.
